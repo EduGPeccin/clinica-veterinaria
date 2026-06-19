@@ -5,21 +5,25 @@ export class Animal {
   nome: string;
   idade: number;
   peso: number;
-  especie: string;
-  porte: string;
+  especie: Especie;
+  porte: Porte;
   nomeDono: string;
   telefoneDono: string;
   cpfDono: string;
+  raca:string;
+  pelagem: string;
 
   constructor(
     nome: string,
     idade: number,
     peso: number,
-    especie: string,
-    porte: string,
+    especie: Especie,
+    porte: Porte,
     nomeDono: string,
     telefoneDono: string,
-    cpfDono: string
+    cpfDono: string,
+    raca:string,
+    pelagem: string,
   ) {
     this.nome = nome;
     this.idade = idade;
@@ -29,19 +33,31 @@ export class Animal {
     this.nomeDono = nomeDono;
     this.telefoneDono = telefoneDono;
     this.cpfDono = cpfDono;
+    this.raca = raca;
+    this.pelagem = pelagem;
   }
 
-  getCategoriaVacina(): string {
-    if (this.especie === "cachorro") {
-      if (this.porte === "pequeno") return "V8-pequeno";
-      if (this.porte === "medio") return "V8-medio";
-      return "V10-grande";
-    } else if (this.especie === "gato") {
-      return "V4-felino";
-    }
-
-    return "";
+ getCategoriaVacina(): string {
+  if (this.especie === "cachorro") {
+    if (this.porte === "pequeno") return "V8-pequeno";
+    if (this.porte === "medio") return "V8-medio";
+    return "V10-grande";
   }
+
+  if (this.especie === "gato") {
+    return "V4-felino";
+  }
+
+  if (this.especie === "passaro") {
+    return "Vacina para aves";
+  }
+
+  if (this.especie === "reptil") {
+    return "Vacina para répteis";
+  }
+
+  return "Categoria não definida";
+}
 
   imprimirFicha(): void {
     console.log("========== FICHA DO ANIMAL ==========");
@@ -50,6 +66,8 @@ export class Animal {
     console.log("Porte  : " + this.porte);
     console.log("Peso   : " + this.peso + " kg");
     console.log("Idade  : " + this.idade + " anos");
+    console.log("Raça   : " + this.raca);
+    console.log("Pelagem: " + this.pelagem);
     console.log(
       "Dono   : " +
         this.nomeDono +
