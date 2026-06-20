@@ -1,9 +1,8 @@
 import { ClinicaService } from "./service/ClinicaService";
 import { Veterinario } from "./model/Veterinario";
-import { Cachorro } from "./model/Cachorro";
-import { Gato } from "./model/Gato";
 import { Prontuario } from "./model/Prontuario";
 import { Estoque } from "./model/Estoque";
+import { Animal } from "./model/Animal";
 
 class Main {
   static main(): void {
@@ -16,7 +15,7 @@ class Main {
       "51999990001",
       "carlos@clinica.com",
       "CRMV-1234",
-      "clinico"
+      "clinico",
     );
     const v2 = new Veterinario(
       "Dra. Ana",
@@ -24,38 +23,41 @@ class Main {
       "51999990002",
       "ana@clinica.com",
       "CRMV-5678",
-      "cirurgiao"
+      "cirurgiao",
     );
 
-    clinica.veterinarios.push(v1);
-    clinica.veterinarios.push(v2);
+    clinica.getVeterinarios().push(v1);
+    clinica.getVeterinarios().push(v2);
 
     // ---- Cadastro de animais ---------------------------------------------
-    const dog = new Cachorro(
+    const dog = new Animal(
       "Rex",
-      3,
-      12.5,
+      5,
+      20.0,
+      "cachorro",
       "grande",
-      "Labrador",
-      false,
-      "João Silva",
+      "Maria Silva",
       "51988880001",
-      "11122233344"
+      "11122233344",
+      "Labrador",
+      "curta",
     );
 
-    const cat = new Gato(
+    const cat = new Animal(
       "Mimi",
-      2,
-      4.0,
-      true,
-      "curta",
+      3,
+      4.5,
+      "gato",
+      "pequeno",
       "Maria Souza",
       "51988880002",
-      "55566677788"
+      "55566677788",
+      "Siamês",
+      "longa",
     );
 
-    clinica.animais.push(dog);
-    clinica.animais.push(cat);
+    clinica.getAnimais().push(dog);
+    clinica.getAnimais().push(cat);
 
     // ---- Agendamento -----------------------------------------------------
     const c1 = clinica.agendarConsulta("Rex", "Dr. Carlos", new Date());
@@ -76,8 +78,8 @@ class Main {
 
     // ---- Prontuário ------------------------------------------------------
     const p = new Prontuario(1, dog);
-    p.diagnostico = "Otite leve";
-    p.prescricao = "Antifúngico tópico";
+    p.setDiagnostico("Otite leve");
+    p.setPrescricao("Antifúngico tópico");
     p.adicionarObservacao("Animal agitado durante consulta");
     p.enviarEmail();
 
@@ -88,7 +90,7 @@ class Main {
       "antibiotico",
       25.0,
       4,
-      "2025-12-01"
+      "2025-12-01",
     );
     estoque.adicionar(med);
 

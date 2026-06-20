@@ -2,10 +2,10 @@ import { Pessoa } from "./Pessoa";
 import { Consulta } from "./Consulta";
 
 export class Veterinario extends Pessoa {
-  crmv: string;
-  especialidade: string;
-  historicoConsultas: Consulta[] = [];
-  disponivel: boolean = true;
+  private crmv: string;
+  private especialidade: string;
+  private historicoConsultas: Consulta[] = [];
+  private disponivel: boolean = true;
 
   constructor(
     nome: string,
@@ -33,8 +33,28 @@ export class Veterinario extends Pessoa {
   }
 
   finalizarConsulta(c: Consulta): void {
-    c.status = "finalizada";
+    c.setStatus("finalizada");
     this.historicoConsultas.push(c);
     this.disponivel = true;
+  }
+
+  public getCrmv(): string {
+    return this.crmv;
+  }
+
+  public getEspecialidade(): string {
+    return this.especialidade;
+  }
+
+  public getHistoricoConsultas(): Consulta[] {
+    return this.historicoConsultas;
+  }
+
+  public getDisponivel(): boolean {
+    return this.disponivel;
+  }
+
+  public setDisponivel(disponivel: boolean): void {
+    this.disponivel = disponivel;
   }
 }

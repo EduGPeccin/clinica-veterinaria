@@ -1,22 +1,22 @@
 import { Animal } from "./Animal";
 
 export class Consulta {
-  id: number;
-  animal: Animal;
-  veterinario: string;
-  dataHora: Date;
-  status: string;
-  motivoCancelamento?: string;
-  valorConsulta: number;
-  formaPagamento?: string;
-  pago: boolean;
+  private id: number;
+  private animal: Animal;
+  private veterinario: string;
+  private dataHora: Date;
+  private status: string;
+  private motivoCancelamento?: string;
+  private valorConsulta: number;
+  private formaPagamento?: string;
+  private pago: boolean;
 
   constructor(
     id: number,
     animal: Animal,
     veterinario: string,
     dataHora: Date,
-    valorConsulta: number
+    valorConsulta: number,
   ) {
     try {
       if (animal === null) throw new Error("animal nulo");
@@ -36,12 +36,53 @@ export class Consulta {
     this.pago = false;
   }
 
-  registrarPagamento(forma: string): void {
-    if (
-      forma === "pix" ||
-      forma === "cartao" ||
-      forma === "dinheiro"
-    ) {
+  public getId(): number {
+    return this.id;
+  }
+
+  public getStatus(): string {
+    return this.status;
+  }
+
+  public getValorConsulta(): number {
+    return this.valorConsulta;
+  }
+
+  public getAnimal(): Animal {
+    return this.animal;
+  }
+
+  public getVeterinario(): string {
+    return this.veterinario;
+  }
+
+  public getDataHora(): Date {
+    return this.dataHora;
+  }
+
+  public getFormaPagamento(): string | undefined {
+    return this.formaPagamento;
+  }
+
+  public isPago(): boolean {
+    return this.pago;
+  }
+
+  public setVeterinario(veterinario: string): void {
+    if (veterinario.trim().length > 0) {
+      this.veterinario = veterinario;
+    }
+  }
+
+  public setStatus(status: string): void {
+    const statusValido = ["agendada", "finalizada", "cancelada"];
+    if (statusValido.includes(status)) {
+      this.status = status;
+    }
+  }
+
+  public registrarPagamento(forma: string): void {
+    if (forma === "pix" || forma === "cartao" || forma === "dinheiro") {
       this.formaPagamento = forma;
       this.pago = true;
     } else {
@@ -49,17 +90,17 @@ export class Consulta {
     }
   }
 
-  cancelar(motivo: string): void {
-    this.status = "cancelada";
+  public cancelar(motivo: string): void {
+    this.setStatus("cancelada");
     this.motivoCancelamento = motivo;
   }
 
-  imprimirResumo(): void {
+  public imprimirResumo(): void {
     console.log(
       "[Consulta #" +
         this.id +
         "] " +
-        this.animal.nome +
+        this.animal.getNome() +
         " | Vet: " +
         this.veterinario +
         " | Status: " +
@@ -67,7 +108,7 @@ export class Consulta {
         " | Valor: R$" +
         this.valorConsulta +
         " | Pago: " +
-        (this.pago ? "Sim" : "Não")
+        (this.pago ? "Sim" : "Não"),
     );
   }
 }
