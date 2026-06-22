@@ -32,6 +32,11 @@ export class Prontuario implements Registravel {
   }
 
   deletar(): void {
+    console.log("Prontuário removido.");
+  }
+
+  exportarCSV(): void {
+    console.log("Exportando prontuário para CSV.");
   }
 
   imprimir(): void {
@@ -41,22 +46,32 @@ export class Prontuario implements Registravel {
         " | Animal: " +
         this.animal.getNome() +
         " | Diagnóstico: " +
-        this.diagnostico
+        (this.diagnostico ?? "Não informado") +
+        " | Prescrição: " +
+        (this.prescricao ?? "Não informada") +
+        " | Observações: " +
+        this.observacoes.join(", ") +
+        " | Data de Criação: " +
+        this.dataCriacao.toLocaleDateString(),
     );
-  }
-
-  exportarCSV(): void {
-
   }
 
   enviarEmail(): void {
     console.log(
-      "Enviando prontuário por email para " + this.animal.getNomeDono()
+      "Enviando prontuário por email para " + this.animal.getNomeDono(),
     );
   }
 
   adicionarObservacao(obs: string): void {
     this.observacoes.push(obs);
+  }
+
+  getId(): number {
+    return this.id;
+  }
+
+  getDiagnostico(): string | undefined {
+    return this.diagnostico;
   }
 
   setDiagnostico(diagnostico: string): void {
