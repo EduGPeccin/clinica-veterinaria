@@ -108,7 +108,7 @@ class Main {
     estoque.alertarEstoqueBaixo();
 
     estoque.getItens().slice(0);
-    console.log("Itens após clear externo: " + estoque.itens.length);
+    console.log("Itens após clear externo: " + estoque.getItens().length);
 
     // ---- Relatórios ------------------------------------------------------
     clinica.gerarRelatorioConsultas();
