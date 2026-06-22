@@ -1,17 +1,17 @@
 export class Estoque {
   static Medicamento = class {
-    nome: string;
-    tipo: string;
-    preco: number;
+    readonly nome: string;
+    readonly tipo: string;
+    readonly preco: number;
     quantidade: number;
-    validade: string;
+    readonly validade: string;
 
     constructor(
       nome: string,
       tipo: string,
       preco: number,
       quantidade: number,
-      validade: string
+      validade: string,
     ) {
       this.nome = nome;
       this.tipo = tipo;
@@ -45,8 +45,8 @@ export class Estoque {
     return false;
   }
 
-  getItens(): InstanceType<typeof Estoque.Medicamento>[] {
-    return this.itens;
+  getItens(): readonly InstanceType<typeof Estoque.Medicamento>[] {
+    return [...this.itens];
   }
 
   imprimirEstoque(): void {
@@ -61,7 +61,7 @@ export class Estoque {
           " | Validade: " +
           m.validade +
           " | R$" +
-          m.preco
+          m.preco,
       );
     }
   }

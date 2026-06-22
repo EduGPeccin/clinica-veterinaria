@@ -31,14 +31,14 @@ class Main {
       "João Silva",
       "11122233344",
       "51988880001",
-      "joao@dominio.com"
+      "joao@dominio.com",
     );
 
     const c2 = new Pessoa(
       "Maria Souza",
       "55566677788",
       "51988880002",
-      "maria@dominio.com"
+      "maria@dominio.com",
     );
 
     clinica.getVeterinarios().push(v1);
@@ -107,7 +107,7 @@ class Main {
 
     estoque.alertarEstoqueBaixo();
 
-    estoque.getItens().splice(0);
+    estoque.getItens().slice(0);
     console.log("Itens após clear externo: " + estoque.itens.length);
 
     // ---- Relatórios ------------------------------------------------------
