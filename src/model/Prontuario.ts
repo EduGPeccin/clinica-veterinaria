@@ -14,7 +14,6 @@ export class Prontuario implements Registravel {
   private animal: Animal;
   private observacoes: string[] = [];
   private dataCriacao: Date;
-  private peso: number;
   private diagnostico?: string;
   private prescricao?: string;
 
@@ -22,7 +21,6 @@ export class Prontuario implements Registravel {
     this.id = id;
     this.animal = animal;
     this.dataCriacao = new Date();
-    this.peso = animal.getPeso();
   }
 
   registrar(): void {

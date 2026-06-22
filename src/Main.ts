@@ -3,6 +3,7 @@ import { Veterinario } from "./model/Veterinario";
 import { Prontuario } from "./model/Prontuario";
 import { Estoque } from "./model/Estoque";
 import { Animal } from "./model/Animal";
+import { Pessoa } from "./model/Pessoa";
 
 class Main {
   static main(): void {
@@ -26,6 +27,20 @@ class Main {
       "cirurgiao",
     );
 
+    const c1 = new Pessoa(
+      "João Silva",
+      "11122233344",
+      "51988880001",
+      "joao@dominio.com"
+    );
+
+    const c2 = new Pessoa(
+      "Maria Souza",
+      "55566677788",
+      "51988880002",
+      "maria@dominio.com"
+    );
+
     clinica.getVeterinarios().push(v1);
     clinica.getVeterinarios().push(v2);
 
@@ -36,9 +51,7 @@ class Main {
       20.0,
       "cachorro",
       "grande",
-      "Maria Silva",
-      "51988880001",
-      "11122233344",
+      c1,
       "Labrador",
       "curta",
     );
@@ -49,9 +62,7 @@ class Main {
       4.5,
       "gato",
       "pequeno",
-      "Maria Souza",
-      "51988880002",
-      "55566677788",
+      c2,
       "Siamês",
       "longa",
     );
@@ -60,20 +71,20 @@ class Main {
     clinica.getAnimais().push(cat);
 
     // ---- Agendamento -----------------------------------------------------
-    const c1 = clinica.agendarConsulta("Rex", "Dr. Carlos", new Date());
-    const c2 = clinica.agendarConsulta("Mimi", "Dra. Ana", new Date());
+    const co1 = clinica.agendarConsulta("Rex", "Dr. Carlos", new Date());
+    const co2 = clinica.agendarConsulta("Mimi", "Dra. Ana", new Date());
 
     // ---- Pagamento -------------------------------------------------------
-    c1.registrarPagamento("pix");
+    co1.registrarPagamento("pix");
 
     try {
-      c2.registrarPagamento("Cartao");
+      co2.registrarPagamento("Cartao");
     } catch (e) {
       console.log("Erro no pagamento: " + (e as Error).message);
     }
 
     // ---- Desconto --------------------------------------------------------
-    const desconto = clinica.calcularDesconto(c1);
+    const desconto = clinica.calcularDesconto(co1);
     console.log("Desconto para Rex: R$" + desconto);
 
     // ---- Prontuário ------------------------------------------------------

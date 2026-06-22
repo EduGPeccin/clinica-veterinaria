@@ -1,3 +1,5 @@
+import { Pessoa } from "./Pessoa";
+
 type Especie = "cachorro" | "gato" | "passaro" | "reptil";
 type Porte = "pequeno" | "medio" | "grande";
 
@@ -7,9 +9,7 @@ export class Animal {
   private peso: number;
   private especie: Especie;
   private porte: Porte;
-  private nomeDono: string;
-  private telefoneDono: string;
-  private cpfDono: string;
+  private dono: Pessoa;
   private raca: string;
   private pelagem: string;
 
@@ -19,9 +19,7 @@ export class Animal {
     peso: number,
     especie: Especie,
     porte: Porte,
-    nomeDono: string,
-    telefoneDono: string,
-    cpfDono: string,
+    dono: Pessoa,
     raca: string,
     pelagem: string,
   ) {
@@ -30,9 +28,7 @@ export class Animal {
     this.peso = peso;
     this.especie = especie;
     this.porte = porte;
-    this.nomeDono = nomeDono;
-    this.telefoneDono = telefoneDono;
-    this.cpfDono = cpfDono;
+    this.dono = dono;
     this.raca = raca;
     this.pelagem = pelagem;
   }
@@ -70,7 +66,7 @@ export class Animal {
   }
 
   public getNomeDono(): string {
-    return this.nomeDono;
+    return this.dono.getNome();
   }
 
   public getCategoriaVacina(): string {
